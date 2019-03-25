@@ -2,7 +2,7 @@
   "name": "ssr-demo",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+  "-save": {
     "axios": "^0.18.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
@@ -26,5 +26,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "koa": "^2.7.0"
+  }
 }
