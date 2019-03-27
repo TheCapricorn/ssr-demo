@@ -1,6 +1,8 @@
 
 const path = require('path');
-module.exports={
+const merge = require('webpack-merge');
+const webpackConfig= require('./webpack.config');
+const config={
     mode:"development",
     entry:'./src/client/index',
     output:{
@@ -12,4 +14,6 @@ module.exports={
         contentBase:path.join(__dirname,'/dist'),
         compress: true,
     },
+    
 }
+module.exports=merge(config,webpackConfig)

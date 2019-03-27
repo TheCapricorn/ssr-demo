@@ -4,10 +4,10 @@ import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import {matchRoutes,renderRoutes} from "react-router-config";
 import routes from "../Routes";
-
+const store={}
 const App=()=>{
     return (
-        <Provider stroe={}>
+        <Provider store={store}>
             <BrowserRouter>
                 {
                     renderRoutes(routes)
@@ -16,4 +16,7 @@ const App=()=>{
         </Provider>
     )
 }
+
+
+ReactDom.hydrate(<App/>,document.getElementById("root"))
 
