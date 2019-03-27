@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheCapricorn/ssr-demo.git"
@@ -26,5 +24,9 @@
     "react-router-config": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "webpack-merge": "^4.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }
