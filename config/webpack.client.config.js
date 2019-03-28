@@ -8,17 +8,21 @@ const {
     appPublic,
     appHtml
 } = require('./paths');
+const publicPath = '/';
+console.log(appPublic)
 const config = {
     mode: "development",
     entry: './src/client/index',
     output: {
+        pathinfo: true,
         filename: 'static/js/bundle.js',
         // There are also additional JS chunk files if you use code splitting.
         chunkFilename: 'static/js/[name].chunk.js'
     },
     devServer: {
         port: 3002,
-        contentBase: appPublic,
+        publicPath: publicPath,
+        contentBase:appPublic,
         compress: true,
     },
     module: {
