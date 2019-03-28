@@ -1,14 +1,25 @@
 const {
-    appServerBuild
-} = require('./paths')
-module.exports = {
-    target: "node",
-    entry: './src/server/index',
+    appBuild
+} = require('./paths');
+const merge = require('webpack-merge');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const config = require('./webpack.config');
+const clientPordConfig = {
+    mode: 'production',
+    entry: './src/client/index.js',
     output: {
-        path: appServerBuild,
+        path: appBuild,
+        filename: 'static/js/[name].[chunkhash:8].js',
+        chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     },
+
     module: {
-        rules: [
+        rules: [{
+                test: /\.(js|jsx|mjs)$/,
+                loader: require.resolve('source-map-loader'),
+                enforce: 'pre',
+                include: appSrc,
+            },
             {
                 oneOf: [{
                         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -70,7 +81,6 @@ module.exports = {
                         ),
                         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
                     },
-                    
                     {
                         exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
                         loader: require.resolve('file-loader'),
@@ -80,7 +90,10 @@ module.exports = {
                     },
 
                 ]
-            }
+            },
+
         ],
     },
+
 }
+module.exports = merge(config, clientPordConfig)
