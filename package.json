@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:client": " webpack  webpack-dev-server    --config  ./config/webpack.client.config.js"
+    "start:client": "   webpack-dev-server    --config  ./config/webpack.client.config.js"
   },
   "repository": {
     "type": "git",

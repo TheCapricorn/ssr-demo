@@ -5,15 +5,14 @@ import {BrowserRouter} from "react-router-dom";
 import {matchRoutes,renderRoutes} from "react-router-config";
 import routes from "../Routes";
 const store={}
+console.log(1)
 const App=()=>{
     return (
-        <Provider store={store}>
-            <BrowserRouter>
+        <BrowserRouter>
                 {
                     renderRoutes(routes)
                 }
-            </BrowserRouter>
-        </Provider>
+        </BrowserRouter>
     )
 }
 
