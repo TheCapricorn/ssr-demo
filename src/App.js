@@ -1,8 +1,15 @@
 import React from "react";
+import {renderRoutes} from "react-router-config";
 
-const App=()=>{
+const App=(props)=>{
+    const routes = props.route.routes;
+
     return (
-        <div></div>
+        <div>
+            {
+                renderRoutes(routes)
+            }
+        </div>
     )
 }
 

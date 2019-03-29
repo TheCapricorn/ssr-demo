@@ -1,9 +1,14 @@
 const {
-    appBuild
+    appBuild,
+    appSrc,
+    appHtml,
 } = require('./paths');
+const fs = require('fs-extra');
 const merge = require('webpack-merge');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./webpack.config');
+
 const clientPordConfig = {
     mode: 'production',
     entry: './src/client/index.js',
@@ -31,7 +36,7 @@ const clientPordConfig = {
                     },
                     {
                         test: /\.(js|jsx|mjs)$/,
-                        include: paths.appSrc,
+                        include: appSrc,
                         loader: require.resolve('babel-loader'),
                         options: {
 
@@ -53,7 +58,7 @@ const clientPordConfig = {
                                         options: {
                                             importLoaders: 1,
                                             minimize: true,
-                                            sourceMap: shouldUseSourceMap,
+                                            sourceMap: true,
                                         },
                                     },
                                     {
@@ -94,6 +99,13 @@ const clientPordConfig = {
 
         ],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: appHtml,
+        }),
+    ],
 
 }
+
+fs.emptyDirSync(appBuild);
 module.exports = merge(config, clientPordConfig)

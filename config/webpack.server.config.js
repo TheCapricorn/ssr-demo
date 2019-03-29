@@ -1,11 +1,17 @@
 const {
-    appServerBuild
+    appServerBuild,
+    appSrc,
+    appPublic,
 } = require('./paths')
+const fs = require('fs-extra');
+const merge = require('webpack-merge');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     target: "node",
     entry: './src/server/index',
     output: {
         path: appServerBuild,
+        publicPath:appPublic,
     },
     module: {
         rules: [
@@ -20,7 +26,7 @@ module.exports = {
                     },
                     {
                         test: /\.(js|jsx|mjs)$/,
-                        include: paths.appSrc,
+                        include: appSrc,
                         loader: require.resolve('babel-loader'),
                         options: {
 
@@ -42,7 +48,7 @@ module.exports = {
                                         options: {
                                             importLoaders: 1,
                                             minimize: true,
-                                            sourceMap: shouldUseSourceMap,
+                                            sourceMap: true,
                                         },
                                     },
                                     {
