@@ -1,7 +1,9 @@
 
 const fs = require("fs");
+import React from "react";
 import {StaticRouter} from "react-router-dom";
 import {renderRoutes} from "react-router-config";
+import {renderToString} from "react-dom/server";
 import {appHtml} from "../../config/paths";
 
 const content = (routes,req)=>{
@@ -14,8 +16,8 @@ const content = (routes,req)=>{
     )
 }
 
-export const render=()=>{
-   let template = fs.readFileSync(appHtml);
-   
-   return template.replace('<!-- app -->',content())
+export const render=(routes,req)=>{
+   let template = fs.readFileSync(appHtml,'utf-8');
+ 
+   return template.replace('<!-- app -->',  renderToString(content(routes,req)))
 }

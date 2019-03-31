@@ -5,13 +5,21 @@ import Router from "koa-router";
 import {render} from "./utils";
 import routes from "../Routes";
 const router=new Router();
-router.get("/",async (ctx,next)=>{
-    console.log(router.routes)
-    await next();
-    ctx.response.body=render(routes);
-    ctx.response.status=200;
+
+router.get("/home",async (ctx,next)=>{
+    try{
+        ctx.body=render(routes,ctx.request);
+        ctx.status=200;
+    }catch(e){
+        console.log(e)
+    }
+    
+  
+   /*  await next(); */
 })
+
 app.use(logger());
-console.log(router.routes())
-app.use(router.routes).use(router.allowedMethods());
-app.listen(8080)
+
+app.use(router.routes())
+
+app.listen(8081)
