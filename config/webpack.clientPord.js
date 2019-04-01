@@ -5,10 +5,11 @@ const {
 } = require('./paths');
 const fs = require('fs-extra');
 const merge = require('webpack-merge');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./webpack.config');
-
+const cssFilename = 'static/css/[name].[contenthash:8].css';
 const clientPordConfig = {
     mode: 'production',
     entry: './src/client/index.js',
@@ -45,46 +46,37 @@ const clientPordConfig = {
                     },
                     {
                         test: /\.css$/,
-                        loader: ExtractTextPlugin.extract(
-                            Object.assign({
-                                fallback: {
-                                    loader: require.resolve('style-loader'),
-                                    options: {
-                                        hmr: false,
-                                    },
+                        use:[
+                            MiniCssExtractPlugin.loader,
+                            {
+                                loader: require.resolve('css-loader'),
+                                options: {
+                                    importLoaders: 1,
+                                 /*    minimize: true, */
+                                    sourceMap: true,
                                 },
-                                use: [{
-                                        loader: require.resolve('css-loader'),
-                                        options: {
-                                            importLoaders: 1,
-                                            minimize: true,
-                                            sourceMap: true,
-                                        },
-                                    },
-                                    {
-                                        loader: require.resolve('postcss-loader'),
-                                        options: {
-                                            // Necessary for external CSS imports to work
-                                            // https://github.com/facebookincubator/create-react-app/issues/2677
-                                            ident: 'postcss',
-                                            plugins: () => [
-                                                require('postcss-flexbugs-fixes'),
-                                                autoprefixer({
-                                                    browsers: [
-                                                        '>1%',
-                                                        'last 4 versions',
-                                                        'Firefox ESR',
-                                                        'not ie < 9', // React doesn't support IE8 anyway
-                                                    ],
-                                                    flexbox: 'no-2009',
-                                                }),
+                            },
+                            {
+                                loader: require.resolve('postcss-loader'),
+                                options: {
+                                    // Necessary for external CSS imports to work
+                                    // https://github.com/facebookincubator/create-react-app/issues/2677
+                                    ident: 'postcss',
+                                    plugins: () => [
+                                        require('postcss-flexbugs-fixes'),
+                                        autoprefixer({
+                                            browsers: [
+                                                '>1%',
+                                                'last 4 versions',
+                                                'Firefox ESR',
+                                                'not ie < 9', // React doesn't support IE8 anyway
                                             ],
-                                        },
-                                    },
-                                ],
-                            }, )
-                        ),
-                        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+                                            flexbox: 'no-2009',
+                                        }),
+                                    ],
+                                },
+                            },
+                        ]
                     },
                     {
                         exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
@@ -103,6 +95,9 @@ const clientPordConfig = {
         new HtmlWebpackPlugin({
             template: appHtml,
         }),
+        new MiniCssExtractPlugin({
+            filename: cssFilename,
+          }),
     ],
 
 }

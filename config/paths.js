@@ -8,5 +8,5 @@ module.exports= {
  appBuild: resolveApp('build'),
  appServerBuild:resolveApp('serverBuild'),
  appPublic: resolveApp('public'),
- appHtml:resolveApp('public/index.html'),
+ appBuildHtml:resolveApp('build/index.html'),
 }

@@ -1,8 +1,9 @@
 import React from "react";
+import "../../../public/css/comm.css"
 const Home=()=>{
-    console.log(2)
+
     return (
-        <div>hello world !</div>
+        <div className="app-text">hello world !</div>
     )
 }
 

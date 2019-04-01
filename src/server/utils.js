@@ -4,7 +4,7 @@ import React from "react";
 import {StaticRouter} from "react-router-dom";
 import {renderRoutes} from "react-router-config";
 import {renderToString} from "react-dom/server";
-import {appHtml} from "../../config/paths";
+import {appBuildHtml} from "../../config/paths";
 
 const content = (routes,req)=>{
     return(
@@ -17,7 +17,7 @@ const content = (routes,req)=>{
 }
 
 export const render=(routes,req)=>{
-   let template = fs.readFileSync(appHtml,'utf-8');
+   let template = fs.readFileSync(appBuildHtml,'utf-8');
  
    return template.replace('<!-- app -->',  renderToString(content(routes,req)))
 }
