@@ -8,6 +8,9 @@ const  Routes=[
                 component:Home,
                 path:'/',
                 exact: true,
+                loadData:function(){
+                    
+                }
             }
         ],
     }

@@ -2,14 +2,17 @@ import koa from "koa";
 import Router from "koa-router";
 import {render} from "./utils";
 import routes from "../Routes";
+import {matchRoutes} from "react-router-config";
 import {appBuild} from "../../config/paths"
 const app = new koa();
 const logger = require('koa-logger');
 const staticServer = require('koa-static');
+
 const router=new Router();
 
 router.get("/",async (ctx,next)=>{
     try{
+        
         ctx.body=render(routes,ctx.request);
         ctx.status=200;
     }catch(e){
