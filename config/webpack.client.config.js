@@ -6,7 +6,7 @@ const autoprefixer = require('autoprefixer');
 const {
     appSrc,
     appPublic,
-    appHtml
+    appPublicHtml,
 } = require('./paths');
 const publicPath = '/';
 console.log(appPublic)
@@ -100,7 +100,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: appHtml,
+            template: appPublicHtml,
         }),
     ],
 

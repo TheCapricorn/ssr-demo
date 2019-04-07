@@ -1,7 +1,7 @@
 const {
     appBuild,
     appSrc,
-    appHtml,
+    appPublicHtml,
 } = require('./paths');
 const fs = require('fs-extra');
 const merge = require('webpack-merge');
@@ -93,7 +93,7 @@ const clientPordConfig = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: appHtml,
+            template: appPublicHtml,
         }),
         new MiniCssExtractPlugin({
             filename: cssFilename,
