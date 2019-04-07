@@ -12,12 +12,13 @@ const publicPath = '/';
 console.log(appPublic)
 const config = {
     mode: "development",
+    devtool:'eval-source-map',
     entry: './src/client/index',
     output: {
         pathinfo: true,
-        filename: 'static/js/bundle.js',
+        filename: 'static/js/[name].[hash].bundle.js',
         // There are also additional JS chunk files if you use code splitting.
-        chunkFilename: 'static/js/[name].chunk.js',
+        chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
         publicPath: publicPath,
     },
     devServer: {
